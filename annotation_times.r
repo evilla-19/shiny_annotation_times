@@ -64,7 +64,8 @@ ui = fluidPage(
             #                )
             #             ), 
         mainPanel(width = 4,
-            plotOutput(outputId = 'ms_vs_variable')
+            plotOutput(outputId = 'ms_vs_variable'),
+            PlotOutput(outputId = 'journal_vs_variable')
                  )
                  )
               )
@@ -142,6 +143,12 @@ server = function(input, output)
             }
         }
                                          )
+    
+    output$journal_vs_variable = renderPlot(
+        {
+            
+        }
+                                           )
 }
 
 

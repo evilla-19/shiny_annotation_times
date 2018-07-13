@@ -82,6 +82,13 @@ server = function(input, output)
         }
                              )
 
+    selected_y_var_journal = reactive(
+        {
+            req(input$journal_y_axis)
+            dplyr::select(annotation_data, matches(input$journal_y_axis))
+        }
+                             )
+
     output$ms_vs_variable = renderPlot(
         {
             timeInMins = annotation_data$timeInMins
@@ -146,11 +153,16 @@ server = function(input, output)
     
     output$journal_vs_variable = renderPlot(
         {
-            
+            journals = dplyr::group_by(annotation_data, Journal)
+            averages = dplyr::summarize(journals, total_ms = n(), variable_average = mean(selected_y_var_journal(), na.rm = TRUE))
+            mainplot = 
+                ggplot(averages, 
+                aes = (x = averages$Journal,  y = averages$variable_average)) +
+                geom_bar(stat = 'identity')
         }
                                            )
 }
-
+# this is a test comment
 
 shinyApp(ui = ui, server = server)
 

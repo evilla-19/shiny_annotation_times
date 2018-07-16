@@ -45,7 +45,7 @@ ui = fluidPage(
 
         sidebarPanel(
 
-            wellPanel(
+            wellPanel(style = 'height:400px',
 
                 h3('Manuscript statistics'),
                 
@@ -71,7 +71,7 @@ ui = fluidPage(
                              )
                      ),
             
-            wellPanel(
+            wellPanel(style = 'height:400px',
                 h3('Journal statistics'),
         
                 p('Choose which average variable to plot on the y axis for each journal. Except for time, all the other variables are based only on the subset of manuscripts with underlying source data.'),
@@ -85,10 +85,16 @@ ui = fluidPage(
                      )
                      ),
         
-        mainPanel(width = 4,
-            plotOutput(outputId = 'ms_vs_variable'),
-            plotOutput(outputId = 'journal_vs_variable')
-                 )
+        sidebarPanel(width = 4,
+            wellPanel(
+                plotOutput(height = '360px',
+                    outputId = 'ms_vs_variable')
+                     ),
+            wellPanel(
+            plotOutput(height = '360px',
+                outputId = 'journal_vs_variable')
+                     )
+                    )
                  )
               )
 
@@ -156,7 +162,7 @@ server = function(input, output)
                           )
                 if (input$displayMean == FALSE)
                 {
-                    ggplotly(mainplot, height = 400)
+                    mainplot
                 }
                 else
                 {
@@ -183,7 +189,7 @@ server = function(input, output)
         {
             mainplot = 
                 ggplot(annotation_data, 
-                aes(x = annotation_data$Journal,  y = annotation_data$timeInMins, fill = Journal)) +
+                aes(x = annotation_data$Journal,  y = selected_y_var_journal(), fill = Journal)) +
                 geom_boxplot(alpha = 0.5) +
                 geom_point(aes(col = Journal)) + 
                 xlab('Journal') +
@@ -201,9 +207,6 @@ server = function(input, output)
         }
                                            )
 }
-
-
-
 
 shinyApp(ui = ui, server = server)
 

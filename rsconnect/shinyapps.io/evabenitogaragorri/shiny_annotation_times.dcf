@@ -1,0 +1,13 @@
+name: shiny_annotation_times
+title: shiny_annotation_times
+username:
+account: evabenitogaragorri
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 381840
+bundleId: 1482364
+url: https://evabenitogaragorri.shinyapps.io/shiny_annotation_times/
+when: 1531741602.90641
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: README.md

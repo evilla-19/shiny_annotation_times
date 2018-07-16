@@ -14,7 +14,7 @@ library(plotly)
 ########## read in data ################
 ########################################
 
-setwd('/Users/benito/Documents/SourceData/Shiny')
+# setwd('/Users/benito/Documents/SourceData/Shiny')
 
 annotation_data <- read.delim('Live_Manuscripts.txt', stringsAsFactors = FALSE)
 annotation_data = annotation_data[1:186, -c(19:28) ]
@@ -39,6 +39,7 @@ annotation_data$timeInMins = convert_times(annotation_data$Time.required)
 ########################################
 
 ui = fluidPage(
+    absolutePanel(left = '25%', right = '0%',width = 'auto',
     titlePanel('Visualization of Manu\'s annotation times'),
 
     sidebarLayout(
@@ -95,7 +96,7 @@ ui = fluidPage(
                 outputId = 'journal_vs_variable')
                      )
                     )
-                 )
+                 ))
               )
 
 #####################################
@@ -211,8 +212,3 @@ server = function(input, output)
 shinyApp(ui = ui, server = server)
 
 # shiny::runApp(display.mode="showcase")
-
-
-
-
-

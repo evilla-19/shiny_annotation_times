@@ -39,6 +39,7 @@ annotation_data$timeInMins = convert_times(annotation_data$Time.required)
 ########################################
 
 ui = fluidPage(
+    theme = 'styles.css',
     absolutePanel(left = '25%', right = '0%',width = 'auto',
     titlePanel('Visualization of Manu\'s annotation times'),
 
